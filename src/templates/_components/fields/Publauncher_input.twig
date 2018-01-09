@@ -1,0 +1,19 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Pub Tool Launcher plugin for Craft CMS 3.x
+ *
+ * Publauncher Field Input
+ *
+ * @author    Andy Skogrand
+ * @copyright Copyright (c) 2018 Andy Skogrand
+ * @link      http://bletchley.co
+ * @package   PubToolLauncher
+ * @since     1.0.0
+ */
+#}
+
+{% set baseUrl = craft.app.config.general.pubSiteUrl %}
+{% set id = craft.app.request.segments | last | split('-') | first %}
+
+<a class="btn submit" href="{{baseUrl}}{{id}}" target="_blank">Edit document contents</a>

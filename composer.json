@@ -1,0 +1,41 @@
+{
+    "name": "bletchley/pub-tool-launcher",
+    "description": "Launch simple tool for editing product content",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "pub tool launcher"
+    ],
+    "support": {
+        "docs": "???",
+        "issues": "???"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andy Skogrand",
+            "homepage": "http://bletchley.co"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "bletchley\\pubtoollauncher\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Pub Tool Launcher",
+        "handle": "pub-tool-launcher",
+        "schemaVersion": "1.0.0",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "???",
+        "class": "bletchley\\pubtoollauncher\\PubToolLauncher"
+    }
+}
