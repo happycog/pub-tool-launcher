@@ -16,4 +16,39 @@
 {% set baseUrl = craft.app.config.general.pubSiteUrl %}
 {% set id = craft.app.request.segments | last | split('-') | first %}
 
-<a class="btn submit" href="{{baseUrl}}{{id}}" target="_blank">Edit document contents</a>
+{% js %}
+  var $modal;
+
+  $('#fields-openModal').on('click', function(e) {
+    e.preventDefault();
+    $modal = new Garnish.Modal($('#fields-editor-modal'), {resizable: true});
+  });
+
+  var closeModal = function(message) {
+    if(message == 'close') {
+      $modal.hide();
+    }
+  }
+
+  window.addEventListener('message', function(event) {
+    if (~event.origin.indexOf('{{(baseUrl | split('/'))[1]}}')) {
+      closeModal(event.data);
+    } else {
+      return;
+    }
+  });
+{% endjs %}
+
+<a class="btn submit" id="openModal" href="{{baseUrl}}{{id}}" target="_blank">
+  Edit document contents
+</a>
+
+<div id="editor-modal" class="modal" style="display: none; width: 900px; height: 900px;">
+  <header class="header">
+      <h2>Edit Product Content</h2>
+  </header>
+  <div style="height: 100%">
+    <iframe id="pub_editor" height="100%" width="100%" src="{{baseUrl}}{{id}}"></iframe>
+  </div>
+</div>
+
