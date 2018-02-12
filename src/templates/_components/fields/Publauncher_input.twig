@@ -16,6 +16,11 @@
 {% set baseUrl = craft.app.config.general.pubSiteUrl %}
 {% set id = craft.app.request.segments | last | split('-') | first %}
 
+{% set craftqlSettings = craft.app.plugins.getPlugin('craftql').getSettings() %}
+{% if craftqlSettings.tokens() | length %}
+  {% set graphqlToken = craftqlSettings.tokens()[0].token %}
+{% endif %}
+
 {% js %}
   var $modal;
 
@@ -38,21 +43,27 @@
       return;
     }
   });
+
 {% endjs %}
 
-{% if (id|number_format) %}
-  <a class="btn submit" id="openModal" href="{{baseUrl}}{{id}}" target="_blank">
-    Edit document contents
-  </a>
+{% if graphqlToken is defined %}
+  {% if (id|number_format) %}
+    <a class="btn submit" id="openModal" href="{{baseUrl}}{{id}}" target="_blank">
+      Edit document contents
+    </a>
 
-  <div id="editor-modal" class="modal" style="display: none; width: 900px; height: 900px;">
-    <header class="header">
-        <h2>Edit Product Content</h2>
-    </header>
-    <div style="height: 100%">
-      <iframe id="pub_editor" height="100%" width="100%" src="{{baseUrl}}{{id}}"></iframe>
+    <div id="editor-modal" class="modal" style="display: none; width: 900px; height: 900px;">
+      <header class="header">
+          <h2>Edit Product Content</h2>
+      </header>
+      <div style="height: 100%">
+        <iframe id="pub_editor" height="100%" width="100%" src="{{baseUrl}}{{id}}?superSecretId={{graphqlToken}}"></iframe>
+        }
+      </div>
     </div>
-  </div>
+  {% else %}
+    <p style="color: #da5a47;">Please create the document before adding content.</p>
+  {% endif %}
 {% else %}
-  <p style="color: #da5a47;">Please create the document before adding content.</p>
+  <p style="color: #da5a47;">Please create a CraftQL token in settings.</p>
 {% endif %}
