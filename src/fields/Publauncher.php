@@ -103,13 +103,20 @@ class Publauncher extends Field
         $id = Craft::$app->getView()->formatInputId($this->handle);
         $namespacedId = Craft::$app->getView()->namespaceInputId($id);
 
+        // See if entry has a read only property
+        try {
+            $readOnly = $element['readOnly'];
+        } catch (\yii\base\UnknownPropertyException $error) {
+            $readOnly = false;
+        }
+
         // Variables to pass down to our field JavaScript to let it namespace properly
         $jsonVars = [
             'id' => $id,
             'name' => $this->handle,
             'namespace' => $namespacedId,
             'prefix' => Craft::$app->getView()->namespaceInputId(''),
-            ];
+        ];
         $jsonVars = Json::encode($jsonVars);
         Craft::$app->getView()->registerJs("$('#{$namespacedId}-field').PubToolLauncherPublauncher(" . $jsonVars . ");");
 
@@ -118,6 +125,7 @@ class Publauncher extends Field
             'pub-tool-launcher/_components/fields/Publauncher_input',
             [
                 'name' => $this->handle,
+                'readOnly' => $readOnly,
                 'value' => $value,
                 'field' => $this,
                 'id' => $id,
