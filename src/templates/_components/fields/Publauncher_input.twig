@@ -46,7 +46,7 @@
 
 {% endjs %}
 
-{% if graphqlToken is defined and readOnly != true %}
+{% if graphqlToken is defined and not readOnly %}
   {% if (id|number_format) %}
     <a class="btn submit" id="openModal" href="{{baseUrl}}{{id}}" target="_blank">
       Edit document contents
@@ -70,6 +70,6 @@
   <p style="color: #da5a47;">Please create a CraftQL token in settings.</p>
 {% endif %}
 
-{% if readOnly == true %}
+{% if readOnly %}
   <p style="color: #da5a47;">This content was imported from a legacy system. It is read-only.</p>
 {% endif %}
