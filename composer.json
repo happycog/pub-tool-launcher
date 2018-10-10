@@ -2,7 +2,7 @@
     "name": "bletchley/pub-tool-launcher",
     "description": "Launch simple tool for editing product content",
     "type": "craft-plugin",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "keywords": [
         "craft",
         "cms",
@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-          "bletchley\\pubtoollauncher\\": "src/"
+            "bletchley\\pubtoollauncher\\": "src/"
         }
     },
     "extra": {

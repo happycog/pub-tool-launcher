@@ -127,6 +127,7 @@ class Publauncher extends Field
                 'name' => $this->handle,
                 'readOnly' => $readOnly,
                 'value' => $value,
+                'element' => $element,
                 'field' => $this,
                 'id' => $id,
                 'namespacedId' => $namespacedId,

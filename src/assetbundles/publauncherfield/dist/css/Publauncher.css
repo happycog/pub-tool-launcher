@@ -9,3 +9,14 @@
  * @package   PubToolLauncher
  * @since     1.0.0
  */
+
+textarea.text {
+  font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  font-size: 10px;
+  line-height: 2em;
+}
+
+.warning {
+  color: #da5a47;
+}
