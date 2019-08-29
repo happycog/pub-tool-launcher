@@ -15,6 +15,7 @@
 
 {% set baseUrl = craft.app.config.general.pubSiteUrl %}
 {% set id = craft.app.request.segments | last | split('-') | first %}
+{% set draftId = craft.app.request.getQueryParam('draftId')  %}
 
 {% set craftqlSettings = craft.app.plugins.getPlugin('craftql').getSettings() %}
 {% if craftqlSettings.tokens() | length %}
@@ -47,7 +48,7 @@
 {% endjs %}
 
 {% if graphqlToken is defined and readOnly != true %}
-  {% if (id|number_format) %}
+  {% if (id|number_format) and draftId is null %}
     <a class="btn submit" id="openModal" href="{{baseUrl}}{{id}}" target="_blank">
       Edit document contents
     </a>
